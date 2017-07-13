@@ -1,0 +1,52 @@
+<html>  
+    <head>
+          <title>Final Project</title>
+           <link rel="stylesheet" href="/assets/beach.css">
+           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVRZ6Ne7o7ntZvsHfjO0eEcQgxwjREzNU&callback=myMap"></script>
+    </head>
+    <body>
+        <div class="sixth-div">
+             <br>
+         <h1>  MAP OF BEACH HUTS </h1>
+        <hr>
+        <br><br>
+        <div id="map" style="width:80%; height:500px; margin:0 auto;"></div>
+<script>
+var locations = [
+     ['Hut 1', 24.8323, 66.6616, 5],
+      ['Hut 2', 24.8404, 66.9098, 3],
+      ['Hut 3', 24.8432, 66.7766, 2],
+      ['Hut 4', 24.8433, 66.8128, 1],
+      ['Hut 5', 24.803496786, 67.020499918, 4]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(24.8615,67.0099),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+                   infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+        </script>
+
+
+             
+        </div>
+    </body>
+</html>
